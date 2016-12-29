@@ -38,7 +38,8 @@ class MakeJarPlugin implements Plugin<Project> {
         def gradleBuildVersion = 0
         project.rootProject.buildscript.configurations.each {
             it.getDependencies().each { Dependency d ->
-                if (d.name.equals('gradle')) {
+                if (d.getGroup().equals('com.android.tools.build') &&
+                        d.name.equals('gradle')) {
                     gradleBuildVersion = d.version
                 }
             }
@@ -50,7 +51,7 @@ class MakeJarPlugin implements Plugin<Project> {
             project.rootProject.subprojects.each {
                 Project p ->
                     if (p.getPlugins().hasPlugin(AppPlugin)) {
-                        LogUtils.debug( 'extractProguardFiles task exist')
+                        LogUtils.debug('extractProguardFiles task exist')
                         proguardTask = project.tasks.findByName('extractProguardFiles')
                         if (proguardTask != null) {
                             proguardTask.doLast {
@@ -77,7 +78,7 @@ class MakeJarPlugin implements Plugin<Project> {
             def excludePackage = jarExtension.excludePackage
             //不需要输出jar的jar包列表
             def excludeJar = jarExtension.excludeJar
-            
+
             variants.all { variant ->
                 if (variant.name.capitalize() == "Debug") {
 
@@ -172,9 +173,9 @@ class MakeJarPlugin implements Plugin<Project> {
 //                        LogUtils.debug('aapt_rules = ' + aapt_rules)
 //                        proGuardTask.configuration(aapt_rules)
 
-                        if (jarExtension.needDefaultProguard && proguardFileExist || isOldGradleVersion) {
+                        if (proguardFileExist || isOldGradleVersion) {
                             File proguardFile = project.file(project.android.getDefaultProguardFile('proguard-android.txt'))
-                            if(proguardFile.exists()){
+                            if (proguardFile.exists()) {
                                 proGuardTask.configuration(proguardFile)
                             }
                         }

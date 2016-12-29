@@ -20,8 +20,6 @@ class SdkJarExtension {
     String outputProguardFileName //输出混淆jar包名
     @Input
     String proguardConfigFile //混淆配置
-    @Input
-    boolean needDefaultProguard //是否需要默认的混淆配置proguard-android.txt
 
     public static SdkJarExtension getConfig(Project project) {
         SdkJarExtension config =
