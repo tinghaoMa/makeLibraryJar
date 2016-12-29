@@ -1,0 +1,35 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+repositories {
+    mavenLocal()
+
+}
+
+dependencies {
+    compile gradleApi()//gradle sdk
+    compile localGroovy()//groovy sdk
+    compile 'com.android.tools.build:gradle:2.2.3'
+}
+
+repositories {
+    mavenCentral()
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: uri("file:repo/"))
+        pom.groupId = 'com.gradle.makejar'
+        pom.artifactId = 'plugin'
+        pom.version = '1.0.1'
+        pom.project {
+            inceptionYear '2016'
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+        }
+    }
+}
