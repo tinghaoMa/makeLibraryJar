@@ -13,7 +13,7 @@ import proguard.gradle.ProGuardTask
 
 
 class MakeJarPlugin implements Plugin<Project> {
-    public static final String EXTENSION_NAME = "BuildJar";
+    public static final String EXTENSION_NAME = "JarSetting";
     private def proguardTask;
     private def proguardFileExist;//是否生成了proguard-android.txt文件
     private def isOldGradleVersion;//旧版本的默认文件在sdk/tools下
@@ -141,7 +141,7 @@ class MakeJarPlugin implements Plugin<Project> {
                             }
                         }
 
-                        def proGuardTask = project.tasks.create("proGuardTask", ProGuardTask);
+                        def proGuardTask = project.tasks.create("makeJar", ProGuardTask);
                         proGuardTask.setDescription("混淆jar包")
                         proGuardTask.dependsOn buildJar
                         //设置不删除未引用的资源(类，方法等)
@@ -171,8 +171,12 @@ class MakeJarPlugin implements Plugin<Project> {
 //                        def aapt_rules = project.rootDir.absolutePath + "/intermediates/proguard-rules/release/aapt_rules.txt"
 //                        LogUtils.debug('aapt_rules = ' + aapt_rules)
 //                        proGuardTask.configuration(aapt_rules)
+
                         if (jarExtension.needDefaultProguard && proguardFileExist || isOldGradleVersion) {
-                            proGuardTask.configuration(project.android.getDefaultProguardFile('proguard-android.txt'))
+                            File proguardFile = project.file(project.android.getDefaultProguardFile('proguard-android.txt'))
+                            if(proguardFile.exists()){
+                                proGuardTask.configuration(proguardFile)
+                            }
                         }
                         //输出mapping文件
                         proGuardTask.printmapping(jarExtension.outputFileDir + "/" + "mapping.txt")

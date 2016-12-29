@@ -33,14 +33,14 @@ public class SdkJarUtils {
                     if (it.isDirectory()) {
                         Collection<File> jars = FileUtils.listFiles(it, extensions, true);
                         files.addAll(jars)
-                        LogUtils.debug('mth path = ' + it.absolutePath.toLowerCase())
+                        LogUtils.debug('path = ' + it.absolutePath.toLowerCase())
                         if (it.absolutePath.toLowerCase().endsWith(
                                 ("intermediates" + File.separator + "classes" + File.separator +
                                         variant.name.capitalize()).toLowerCase())) {
                             files.add(it)
                         }
                     } else if (it.name.endsWith(SdkConstants.DOT_JAR)) {
-                        LogUtils.debug('mth name = ' + it.name)
+                        LogUtils.debug('name = ' + it.name)
                         files.add(it)
                     }
                 }
