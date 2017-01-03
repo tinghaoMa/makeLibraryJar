@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply from: './bintary.gradle'
 
 repositories {
     mavenLocal()
@@ -10,6 +11,7 @@ dependencies {
     compile gradleApi()//gradle sdk
     compile localGroovy()//groovy sdk
     compile 'com.android.tools.build:gradle:2.2.3'
+
 }
 
 repositories {
