@@ -85,7 +85,7 @@ class MakeJarPlugin implements Plugin<Project> {
                     if (dexTask != null) {
                         def buildJarBeforeDex = "buildJarBeforeDex${variant.name.capitalize()}"
                         def buildJar = project.tasks.create("buildJar", Jar)
-
+                        def mth= project.task('mth', type: GreetingTask)
                         buildJar.setDescription("构建jar包")
                         Closure buildJarClosure = {
                             //过滤R文件和BuildConfig文件

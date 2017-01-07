@@ -21,9 +21,9 @@ repositories {
 uploadArchives {
     repositories.mavenDeployer {
         repository(url: uri("file:repo/"))
-        pom.groupId = 'com.gradle.makejar'
+        pom.groupId = 'org.gradle.sdkjar.plugin'
         pom.artifactId = 'plugin'
-        pom.version = '1.0.1'
+        pom.version = '1.0.4'
         pom.project {
             inceptionYear '2016'
             licenses {
