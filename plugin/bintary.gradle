@@ -51,9 +51,9 @@ bintray {
 
     configurations = ['archives']
     pkg {
-        repo = 'makeLibraryJar'
+        repo = 'plugin'
         name = PROJ_NAME
-        userOrg = 'ckplugin'
+        userOrg = 'mthplugin'
         websiteUrl = PROJ_WEBSITEURL
         vcsUrl = PROJ_VCSURL
         licenses = ["Apache-2.0"]
