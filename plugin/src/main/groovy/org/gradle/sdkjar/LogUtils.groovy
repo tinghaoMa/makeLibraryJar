@@ -1,4 +1,4 @@
-package org.gradle.sdkjar.plugin
+package org.gradle.sdkjar
 
 
 class LogUtils {

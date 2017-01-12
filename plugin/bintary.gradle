@@ -45,6 +45,28 @@ install {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('info.properties').newDataInputStream())
 
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.java.srcDirs
+    exclude '**'
+}
+
+task BugtagsJavadoc(type: Javadoc) {
+    source = sourceSets.main.java.srcDirs
+    exclude '**'
+    failOnError false
+}
+
+task javadocJar(type: Jar, dependsOn: BugtagsJavadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")

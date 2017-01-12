@@ -1,4 +1,4 @@
-package org.gradle.sdkjar.plugin
+package org.gradle.sdkjar
 
 import com.android.SdkConstants
 import com.android.build.gradle.api.BaseVariant
